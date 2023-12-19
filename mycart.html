@@ -1,0 +1,87 @@
+{% extends 'application/home.html' %}
+{% block content %}
+
+{% comment %}
+ <div align="center" class="product-main1"> 
+     <h1>Mycart <span>Products</span></h1> 
+ </div> 
+ {% endcomment %}
+
+{% comment %} {% if msg %} {% endcomment %}
+{% comment %} {{msg}} {% endcomment %}
+{% comment %} {% endif %} {% endcomment %}
+{% comment %}  {% endcomment %}
+<div>
+
+  <br> 
+  <br>
+  <br>
+  <br>
+</div>
+<div align="center">
+  <h1>{{msg}}</h1>
+</div>
+<div id="mycard-main-box">
+
+
+<div id="mycart">
+{% for i,j,k in list_final %}
+
+ <div id="main-card">
+  
+      <img src="{{i.image.url}}" alt="" width="150px" height="150px">
+      <br>
+      <p>
+        Name : {{i.Name}} <br>
+        {% comment %} your Ordered: {{j}} <br> {% endcomment %}
+        Price : {{i.Price}} <br>
+        Total : {{k}} 
+      </p>
+  <form action="" method="POST" id="mycart_form">
+    {% csrf_token %}
+       <input type="hidden" value={{i.Category}} name="cart">
+       <input type="hidden" value={{i.id}} name="id"> 
+      <h3> Quantity:- <input type="number" value={{j}} name="update"> </h3><br>
+      
+    <input type="submit" value="update" class="update" >
+    
+    <input type="submit" value="Remove" name="remove" class="remove">
+  </form>
+ 
+ </div>
+
+ {% endfor %}
+</div>
+
+{% if GT %}
+<div id="gt-box">
+
+  
+  <form action="{% url "checkout" %}" method="POST" id="gt-text-box">
+   {% csrf_token %}
+    <h4>Shopping Cart</h4>
+
+      
+      <p>A product is added to the cart</p>
+<p>      A product is removed from the cart</p>     
+<p> Any projects in the cart or modified in any way</p>      
+<p>The quantity of any items in the cart are changed</p>      
+
+{% comment %} <p>      Each item in the cart is preserved regardless of when it was added to the cart. The counter on the 180 clock is determined by the date of the most recent addition or modification to the cart contents.</p> {% endcomment %}
+      </p>         
+   <h4 class="fw-bold"> Total Amount of : {{GT}} /-</h4>
+    {% comment %} <h4 class="fw-bold" align="center"> {% endcomment %}
+    {% comment %} {{GT}}</h4> {% endcomment %}
+   {% comment %} <h4>Shipping Charge: 70/-</h4> {% endcomment %}
+   {% comment %} <h4>Final Price : {{TAmount}}</h4> {% endcomment %}
+   
+    <button>Place Order</button>
+  </form>
+
+</div>
+</div>
+ {% endif %}
+ <br>
+{% endblock content %}
+
+

@@ -1,0 +1,60 @@
+{% extends "application/home.html" %}
+{% load static %}
+{% block content %}
+<div>
+   <br>
+</div>
+<br>
+<br>
+<h1 align="center" class="wp">Search Product</h1>
+
+<h1 align="center" class="wp">{{msg}}</h1>
+
+
+<div class="womancloth1">
+    {% for i in data %}
+
+    <div class="womancloth">  
+         <img src="{{i.image.url}}" alt="" width="200px" height="200px">
+         <br>
+         Name :{{i.Name}} <br>
+         Price :{{i.Price}} <br>
+         In Stock:{{i.Quantity}}<br>
+         {% if i.Category == "woman" %}
+         <form action="{% url 'woman' %}" method="POST" id="wsearch">
+            {% csrf_token %}
+            <input type="number" value="" name="requ" >
+            <input type="hidden" name="instoke"  value={{i.Quantity}}>
+            <input type="hidden"  name="product_id" value={{i.id}}>
+            
+            <input type="submit" value="Add to Cart" id="">
+             {% if id == i.id %}{{msg1}}{% endif %}
+          </form>
+          {% endif %}
+          {% if i.Category == "mancloth" %}
+          <form action="{% url 'man' %}" method="POST" id="wsearch">
+             {% csrf_token %}
+             <input type="number" value="" name="requ" >
+             <input type="hidden" name="instoke"  value={{i.Quantity}}>
+             <input type="hidden"  name="product_id" value={{i.id}}>
+             <input type="submit" value="Add to Cart">
+              {% if id == i.id %}{{msg1}}{% endif %}
+           </form>
+           {% endif %}
+           {% if i.Category == "kids" %}
+           <form action="{% url 'kids' %}" method="POST" id="wsearch">
+              {% csrf_token %}
+              <input type="number" value="" name="requ" >
+              <input type="hidden" name="instoke"  value={{i.Quantity}}>
+              <input type="hidden"  name="product_id" value={{i.id}}>
+              <input type="submit" value="Add to Cart">
+               {% if id == i.id %}{{msg1}}{% endif %}
+            </form>
+            {% endif %}
+    </div>   
+     {% endfor %} 
+</div>     
+
+
+
+{% endblock content %}

@@ -1,0 +1,104 @@
+{% extends "application/home.html" %}
+{% block content %}
+{% load static %}
+<head>
+
+
+</head>
+<div>
+
+    <br>
+    <br>
+   
+   
+    <dd>
+    </dd>
+</div>
+
+<div class="container my-5 ">
+    <div class="row mt-10">
+     <h3>Welcome <span>{{request.user|capfirst}}</span></h3>
+     <div class="col-sm-2 border-end">
+      <ul class="list-unstyled">
+         {% comment %} <li>   {% endcomment %}
+          {% comment %} <img src="{% static 'images/02.jpg' %}" alt="" width="150px" height="150px" style="border-radius: 30px"> {% endcomment %}
+        {% comment %} <img src="{% static 'images/edit.png' %}" alt="edit" width="30px" height="30px" style="margin-left: 130px; margin-top: -10px; cursor: pointer;"> {% endcomment %}
+        {% comment %} </li> {% endcomment %}
+         <br>
+        
+         
+       <li class="d-grid"><a href="{% url 'userprofile' %}" class="btn btn-primary">User-Profile</a> </li>
+       <li class="d-grid"><a href="{% url "profile" %}" class="btn">Address-Profile</a></li>
+       <li class="d-grid"><a href="{% url "address" %}" class="btn">Address</a></li>
+   
+      </ul>
+     </div>
+
+     <div class="col-sm-8 offset-sm-1">
+      
+        <form action="{% url "userprofile" %}" method="POST" novalidate>
+          {% csrf_token %}  
+          <h1>User Profile</h1>
+          {% comment %} {% for usr in data %} {% endcomment %}
+           <div class="profile-container">
+             
+            <li>  
+              <img src="{{usr.image.url}}" alt="" name="img" width="150px" height="150px" style="border-radius: 20px; border: 2px solid black">
+            {% comment %} <img src="{% static 'images/edit.png' %}" alt="edit" width="30px" height="30px" style=" margin-top: -10px; cursor: pointer;"> {% endcomment %}
+            <input type="submit" value="Edit" style="margin-top: px;">
+            </li>
+           </div>
+            
+          <div class="profile-container">
+       
+                <div class="form-group">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" placeholder="Your Name" value={{request.user|capfirst}}>
+                </div>
+    
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" placeholder="Your Email" value={{request.email|capfirst}}>
+                </div>
+                
+                <div class="form-group">
+                  <label for="age">Age:</label>
+                  <input type="age" id="age" name="age" placeholder="Your Age" value={{usr.age}}>
+              </div>
+              
+                <div class="form-group">
+                  <label for="number">Mobile No. :</label>
+                  <input type="content" id="number" name="number" placeholder="Your Mobile no" value={{usr.mobilenumber}}>
+                </div>
+    
+                <div class="form-group">
+                  <label class="form-check-label fw-bold" for="">
+                    Gendar :</label>
+                    <br>
+                    <label class="form-check-label fw-bold" for="">
+                      Male</label>
+                    <input type="radio" id="male" name="male">
+
+                    <label class="form-check-label fw-bold ml-5" for="" style="margin-left: 20px;">
+                      Female</label>
+                    <input type="radio" id="female" name="female">
+
+                    <label class="form-check-label fw-bold ml-5" for="" style="margin-left: 20px;">
+                      Others</label>
+                    <input type="radio" id="others" name="others">
+                </div>
+
+                <button type="submit"  class="btn btn-primary mb-3 ml-10 " style="text-align: center; margin-left: 10px; width: 120px" >submit</button>
+                
+          </div>
+          {% comment %} {% endfor %} {% endcomment %}
+          
+                  
+                  
+        </form>     
+        <br>        
+      </div>
+    
+         
+
+{% endblock content %}

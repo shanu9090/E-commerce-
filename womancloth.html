@@ -1,0 +1,46 @@
+{% extends "application/home.html" %}
+
+{% block content %}
+<div class="product-main1">
+    <h1>Our <span> Products</span></h1>
+</div>
+<div>
+</div>
+<div class="wcloth">
+    {% comment %} <ul class="list-group"> {% endcomment %}
+        {% comment %} <li class="list-group-item active">Froack</li> {% endcomment %}
+        {% comment %} <li class="list-group-item">Touser</li> {% endcomment %}
+        {% comment %} <li class="list-group-item">Suit</li> {% endcomment %}
+        {% comment %} <li class="list-group-item">Kurte</li> {% endcomment %}
+        {% comment %} <li class="list-group-item">Western</li> {% endcomment %}
+      {% comment %} </ul> {% endcomment %}
+ {% for i in data %}
+
+ <div class="womancloth">
+         <img src="{{i.image.url}}" alt="" width="200px" height="200px">
+         <br>
+         Name :{{i.Name}} <br>
+         {% comment %} Category :{{i.Category}} <br> {% endcomment %}
+         Price :{{i.Price}} <br>
+         In Stock:{{i.Quantity}}<br>
+         <form action="" method="POST" id="wsearch"> 
+         {% csrf_token %}
+         <input type="number" value="" name="requ" >
+         <input type="hidden"  name="product_id"  value={{i.id}}>
+
+         <input type="hidden" name="instoke"  value={{i.Quantity}}> 
+         <br>
+         <input type="submit" class="btn btn-primary shadow px-5 py-2  mt-2" value="Add to Cart">
+         <br> 
+         {% if id == i.id %}{{msg1}}{% endif %}
+         </form>
+         <br>
+    </div>
+
+    {% endfor %}
+</div>
+<br>
+<br>
+{% endblock content %}
+
+
