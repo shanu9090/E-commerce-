@@ -1,0 +1,95 @@
+{% extends "application/home.html" %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+body{
+
+  background-color: gray;
+}
+
+</style>
+
+<body>
+
+    <form action="{% url "login" %}" method="post" id="loginform" 
+    style="
+    width: 400px; 
+    background-color: brown; 
+    color: white;
+    padding: 50px;
+    margin-top: 150px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 20px;
+    text-align: center;
+    align: center;
+    margin-left: 500px;
+
+    " >
+        {% csrf_token %}
+        <h1>Login Form</h1>
+        {% for i in fm %}
+      <br>
+      <br>
+       
+        {{i.label}}
+        {{i.errors|striptags}}
+        <br>
+        {{i}}
+        {% endfor%}
+        <br><br>
+        <input type="submit" value="Log In">
+    </form>
+
+    {% for i in messages %}
+    {{i}}
+    {% endfor%}
+</body>
+
+</html>
+{% endblock content %} 
+
+{% comment %} 
+
+  {% block content %}
+  <div>
+    <br>
+    <br> 
+    <br> 
+    <br>
+  </div>
+  <br>
+  <button class="homeback"><a href="{% url 'home' %}">Back</a></button>
+	<form action="{% url 'login' %}" method="POST" >
+    {% csrf_token %}
+    
+        <div class="adminlogin">
+          <h1 >Admin Loginpage</h1>
+          <p style="color:red">{{msg}}</p>  
+          <div class="input_box">
+            <i class="fas fa-envelope"></i>
+            <input type="text" placeholder="Enter your email" name="email" class="inputbox" required>
+          </div>
+          <div class="input_box">
+            <i class="fas fa-lock"></i>
+            <input type="password" placeholder="Enter your password" name="password" class="inputbox1" required>
+          </div>
+          <div class="inputbutton">
+            <input type="submit" value="Login">
+          </div>
+          <div class=" sign-up-text">Don't have an account? <a href="{% url 'signup' %}">Sigup now</a></div>
+        </div>
+    </form>
+    
+
+</body>
+</html>
+{% endblock content %}
+{% endcomment %}

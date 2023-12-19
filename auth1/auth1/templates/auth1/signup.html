@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <a href="{% url 'login' %}"><input type="button" value="Log In"></a>
+    <a href="{% url 'logout' %}"><input type="button" value="Log Out"></a>
+    
+    <form action="{% url 'signup' %}" method="post" style="background-color: aqua; width: 300px; height: 500px; text-align: center;">
+        {% csrf_token %}
+        {% for i in fm %}
+        <br><br>
+        {{i.label}}
+        {{i.errors|striptags}}
+        <br>
+        {{i}}
+        {% endfor%}
+        <br><br>
+        <input type="submit" value="Sign Up">
+    </form>
+    {% for i in messages %}
+    {{i}}
+    {% endfor%}
+</body>
+
+</html>

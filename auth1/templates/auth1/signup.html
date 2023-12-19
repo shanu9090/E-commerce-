@@ -1,0 +1,104 @@
+{% extends "application/home.html" %}
+
+{% block content %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>body{
+
+  background-color: gray;
+}</style>
+
+
+
+
+<body bgcolor="gray"> 
+    <form action="{% url 'signup' %}" method="post" 
+    style="
+    width: 500px; 
+    background-color: brown; 
+    color: white;
+    padding: 50px;
+    margin-top: 150px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 20px;
+    text-align: center;
+    align: center;
+    margin-left: 420px;
+    "
+    >
+        {% csrf_token %}
+        <h1>SignUp Form
+        </h1>
+        {% for i in fm %}
+        <br><br>
+      
+        {{i.label}} {{i.errors|striptags}}
+         <br>
+        {{i}}
+        {% endfor%}
+        <br><br>
+        <input type="submit" value="Sign Up">
+    <br>
+    {% for i in messages %}
+    {{i}}
+    {% endfor%}
+</form>
+</body>
+
+</html>
+{% endblock content %} 
+
+{% comment %}
+{% load static %}
+{% block content %}
+    
+
+  <div>
+    <br>
+    <br>
+  </div>
+  <br>
+  <div>
+    <br>
+  </div>
+
+  <button id="backhome"><a href="{% url 'home' %}">Back to home</a></button>
+  <div class="wrapper">
+    <h2 > Admin Registration Form</h2>
+   
+    <form action="{% url 'adminreginsert' %}" method="POST" >
+      {% csrf_token %}
+      <h3 style="color:red">{{msg1}}</h3>
+      <div class="input-box">
+        <input type="text" placeholder="Enter your name"   name="aname" required>
+      </div>
+      <div class="input-box">
+        <input type="text" placeholder="Enter your email" name="aemail" required>
+      </div>
+      <div class="input-box">
+        <input type="password" placeholder="Create password" name="apswd" required>
+      </div>
+      <div class="input-box">
+        <input type="password" placeholder="Confirm password" name="apswdd" required>
+      </div>
+      <div class="input-box button">
+        <input type="Submit" value="Register Now">  
+      </div>
+      <div class="text">
+        
+        <h3>Already have an account? <a href="{% url 'login' %}">Login now</a></h3>
+        <h3 style="color:red">{{msg}}</h3>
+      </div>
+    </form>
+  </div>
+{% endblock content %}
+
+{% endcomment %}
